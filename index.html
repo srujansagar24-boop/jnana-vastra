@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jnana-Vastra | Digital Portal & Archive</title>
+    
+    <!-- Premium Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #0B192C;
+            --bg-card: #11223A;
+            --gold: #D4AF37;
+            --gold-light: #E8D8B0;
+            --text-muted: #A0B2C6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--gold-light);
+            font-family: 'Lora', serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h1, h2, h3, h4, .cinzel {
+            font-family: 'Cinzel', serif;
+        }
+
+        .content-area {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 20px 20px 90px 20px;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: linear-gradient(145deg, var(--bg-card), #081220);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            padding: 22px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .text-center { text-align: center; }
+        .gold-text { color: var(--gold); }
+        
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+            border: none;
+            margin: 15px 0;
+            opacity: 0.5;
+        }
+
+        .badge {
+            background-color: rgba(212, 175, 55, 0.15);
+            border: 1px solid var(--gold);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            display: inline-block;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .vision-box {
+            background: rgba(0,0,0,0.25);
+            border-left: 3px solid var(--gold);
+            padding: 12px 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .pdf-container {
+            width: 100%;
+            height: 60vh;
+            border: 2px solid var(--gold);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 15px;
+            background: #fff;
+        }
+        
+        .pdf-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .audio-player-container {
+            background-color: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            padding: 18px;
+            margin-top: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 10px;
+            outline: none;
+            filter: sepia(20%) hue-rotate(10deg);
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background-color: var(--gold);
+            color: var(--bg-dark);
+            padding: 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: 'Cinzel', serif;
+            margin-top: 15px;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #06101a;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0 18px 0;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            z-index: 1000;
+        }
+
+        .nav-item {
+            color: var(--text-muted);
+            text-align: center;
+            font-size: 11px;
+            cursor: pointer;
+            flex-grow: 1;
+            transition: all 0.3s;
+        }
+
+        .nav-item i {
+            font-size: 18px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .nav-item.active {
+            color: var(--gold);
+        }
+
+        .nav-item.active i {
+            transform: translateY(-2px);
+        }
+
+        ul { padding-left: 18px; line-height: 1.7; color: var(--text-muted); font-size: 14px; }
+        li span { color: var(--gold-light); }
+        p { font-size: 14px; line-height: 1.6; color: var(--text-muted); }
+    </style>
+</head>
+<body>
+
+    <div class="content-area">
+
+        <!-- SECTION 1: STARTING PAGE (HOME, SKSJTI COLLEGE INFO, AIM, VISION) -->
+        <div id="sec-home" class="section active">
+            <div class="card text-center">
+                <span class="badge cinzel">Govt. SKSJTI Bangalore</span>
+                <h3 class="cinzel gold-text" style="font-size: 26px; margin-bottom: 5px;">JNANA-VASTRA</h3>
+                <p style="font-size: 13px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">Engineering Woven Heritage Manuscripts</p>
+                <hr class="divider">
+                <p style="font-size: 15px;">
+                    Welcome to the official digital repository and authenticity portal of Sri Krishnarajendra Silver Jubilee Technological Institute (SKSJTI). This portal accompanies the physical book format engineered using advanced Electronic Jacquard shedding technology.
+                </p>
+            </div>
+
+            <div class="card">
+                <h4 class="cinzel gold-text" style="margin-bottom: 10px;"><i class="fa-solid fa-bullseye"></i> Aim, Vision & Mission</h4>
+                <div class="vision-box">
+                    <strong class="gold-text">Aim:</strong> To pioneer textile typography by converting ancient scriptural documentation into permanent structural jacquard woven books.
+                </div>
+                <div class="vision-box">
+                    <strong class="gold-text">Vision:</strong> To transition traditional paper scripts into indestructible high-definition textile archives that endure generations.
+                </div>
+                <div class="vision-box">
+                    <strong class="gold-text">Mission:</strong> To successfully execute precise CAD step-bindings, pick-and-pick weft insertion, and canvas-reinforced binding structures.
+                </div>
+            </div>
+
+            <div class="card">
+                <h4 class="cinzel gold-text text-center" style="margin-bottom: 10px;"><i class="fa-solid fa-users"></i> Project Team & Guidance</h4>
+                <hr class="divider">
+                <ul style="list-style: none; padding: 0;">
+                    <li><i class="fa-solid fa-user-graduate gold-text"></i> Tharak Babu A <span>(1SK24TX408)</span></li>
+                    <li><i class="fa-solid fa-user-graduate gold-text"></i> Srujan H M <span>(1SK24TX407)</span></li>
+                    <li><i class="fa-solid fa-user-graduate gold-text"></i> Nihal DJ <span>(1SK24TX404)</span></li>
+                    <li><i class="fa-solid fa-user-graduate gold-text"></i> Abishek Dhull <span>(1SK24TX401)</span></li>
+                </ul>
+                <hr class="divider">
+                <p class="text-center" style="font-size: 13px;"><strong>Internal Guide:</strong> Dr. Panduranga H T<br><strong>Co-Guide:</strong> Mr. Virupakshappa<br>Dept. of Textile Technology, SKSJTI</p>
+            </div>
+        </div>
+
+        <!-- SECTION 2: WEAVED MANUSCRIPT (BOOK FORMAT) -->
+        <div id="sec-weaved" class="section">
+            <div class="card">
+                <div class="text-center">
+                    <span class="badge cinzel">Physical Prototype Archive</span>
+                    <h3 class="cinzel gold-text">Weaved Book Format PDF</h3>
+                    <p style="font-size: 13px; color: var(--text-muted); margin-top: 5px;">Documentation of the final copy successfully structured into book format from weaved textile pages.</p>
+                </div>
+                
+                <!-- PDF Viewer for Weaved Book Document -->
+                <div class="pdf-container">
+                    <iframe src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" title="Weaved Book PDF"></iframe>
+                </div>
+
+                <a href="#" class="btn"><i class="fa-solid fa-download"></i> Download Weaved Book Report PDF</a>
+            </div>
+        </div>
+
+        <!-- SECTION 3: FULL BHAGAVAD GITA MANUSCRIPT -->
+        <div id="sec-gita" class="section">
+            <div class="card">
+                <div class="text-center">
+                    <span class="badge cinzel">Complete E-Book</span>
+                    <h3 class="cinzel gold-text">Full Bhagavad Gita Manuscript</h3>
+                    <p style="font-size: 13px; color: var(--text-muted); margin-top: 5px;">Comprehensive archival text corresponding to the woven sequences (Bhagavad-gita Yatharupa by A.C. Bhaktivedanta Swami Prabhupada).</p>
+                </div>
+                
+                <!-- PDF Viewer for Full Bhagavad Gita Document -->
+                <div class="pdf-container">
+                    <iframe src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" title="Full Bhagavad Gita PDF"></iframe>
+                </div>
+
+                <a href="#" class="btn"><i class="fa-solid fa-book-open"></i> Access Full E-Book Archive</a>
+            </div>
+        </div>
+
+        <!-- SECTION 4: CERTIFICATE OF AUTHENTICITY -->
+        <div id="sec-cert" class="section">
+            <div class="card text-center">
+                <i class="fa-solid fa-certificate gold-text" style="font-size: 38px; margin-bottom: 12px;"></i>
+                <h3 class="cinzel gold-text">Certificate of Authenticity</h3>
+                <hr class="divider">
+                <p style="margin-bottom: 12px; font-size: 13px;">This digital certificate guarantees that the physical manuscript corresponds to the verified structural Jacquard design engineered at Govt. SKSJTI Bangalore.</p>
+                
+                <div style="text-align: left; background: rgba(0,0,0,0.3); padding: 14px; border-radius: 8px;">
+                    <h4 class="cinzel gold-text" style="margin-bottom: 8px; font-size: 15px;">Technical Architecture</h4>
+                    <ul>
+                        <li><strong>Institution:</strong> Govt. SKSJTI, Department of Textile Technology</li>
+                        <li><strong>Loom Mechanism:</strong> 5000-Hook Electronic Jacquard</li>
+                        <li><strong>Weave Architecture:</strong> Pick-and-Pick Double Weft</li>
+                        <li><strong>Substrate Stability:</strong> Canvas-Reinforced Book Page</li>
+                        <li><strong>Warp Density:</strong> 112 Ends Per Inch (EPI)</li>
+                        <li><strong>Weft Density:</strong> 56 Picks Per Inch (PPI)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 5: AUDIO BOOK -->
+        <div id="sec-audio" class="section">
+            <div class="card">
+                <div class="text-center">
+                    <span class="badge cinzel">Interactive Audio Archive</span>
+                    <h3 class="cinzel gold-text" style="margin-bottom: 8px;">Listen to the Weave</h3>
+                    <p style="font-size: 13px; color: var(--text-muted);">Audio recitation corresponding to the woven shlokas.</p>
+                </div>
+
+                <div class="audio-player-container">
+                    <h4 class="gold-text" style="margin-bottom: 4px; font-size: 15px;">Chapter 2, Verse 47</h4>
+                    <p style="font-size: 12px; font-style: italic; color: var(--text-muted);">"Karmanye Vadhikaraste Ma Phaleshu Kadachana..."</p>
+                    
+                    <audio controls>
+                        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <nav class="bottom-nav">
+        <div class="nav-item active" onclick="switchSection('sec-home', this)">
+            <i class="fa-solid fa-house"></i>
+            Home
+        </div>
+        <div class="nav-item" onclick="switchSection('sec-weaved', this)">
+            <i class="fa-solid fa-book-bookmark"></i>
+            Weaved Book
+        </div>
+        <div class="nav-item" onclick="switchSection('sec-gita', this)">
+            <i class="fa-solid fa-file-pdf"></i>
+            Full Gita
+        </div>
+        <div class="nav-item" onclick="switchSection('sec-cert', this)">
+            <i class="fa-solid fa-shield-halved"></i>
+            Certificate
+        </div>
+        <div class="nav-item" onclick="switchSection('sec-audio', this)">
+            <i class="fa-solid fa-headphones"></i>
+            Audio
+        </div>
+    </nav>
+
+    <script>
+        function switchSection(sectionId, navElement) {
+            // 1. Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            // 2. Remove 'active' class from all nav items
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+
+            // 3. Show the selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // 4. Add 'active' class to the clicked nav item
+            navElement.classList.add('active');
+            
+            // 5. Scroll to top when switching tabs
+            document.querySelector('.content-area').scrollTo(0,0);
+        }
+    </script>
+</body>
+</html>
